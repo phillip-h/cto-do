@@ -505,7 +505,7 @@ void new_task(void) {
     edit_task(task);
 
     if (strlen(task) != 0) {
-        add_task(task, false, pos + 1);
+        add_task(task, false, list.len ? pos + 1 : pos);
         if (list.len != 0) {
             pos += 1;
         }
