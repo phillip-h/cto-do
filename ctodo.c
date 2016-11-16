@@ -29,6 +29,7 @@ void parse_task(char *str);
 void write_list(void);
 void free_list(void);
 
+unsigned num_tasks(void);
 unsigned num_tasks_done(void);
 
 void start_nc(void);
@@ -325,10 +326,18 @@ void free_list(void) {
     free(list.done);
 }
 
+unsigned num_tasks(void) {
+    unsigned count = 0;
+    for (size_t i = 0; i < list.len; ++i)
+        if (list.tasks[i][0] != div_magic_char)
+            count += 1;
+    return count;
+}
+
 unsigned num_tasks_done(void) {
     unsigned count = 0;
     for (size_t i = 0; i < list.len; ++i)
-        if (list.done[i])
+        if (list.done[i] && list.tasks[i][0] != div_magic_char)
             ++count;
     return count;
 }
@@ -430,8 +439,9 @@ void draw_mark(int n) {
 }
 
 void draw_title_bar(void) {
+    int num_total = num_tasks();
     int num_done = num_tasks_done();
-    int percent_done = list.len ? 100 * num_done / list.len : 0;
+    int percent_done = num_total ? 100 * num_done / list.len : 0;
 
     attron(COLOR_PAIR(color_title));
     attron(color_title_a);
