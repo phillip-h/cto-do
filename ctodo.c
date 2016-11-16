@@ -408,11 +408,14 @@ void draw_task(size_t n, char *task) {
 
     }
 
-    if (n == pos) {
-        pad_to_end(' ');
-    } else {
-        printw("\n");
+    if (task[0] != div_magic_char || !draw_div_lines) {
+        if (n == pos) {
+            pad_to_end(' ');
+        } else {
+            printw("\n");
+        }
     }
+        
 
     attroff(COLOR_PAIR(color_pos));
     attroff(color_pos_a);
