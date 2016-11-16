@@ -400,10 +400,11 @@ void draw_task(size_t n, char *task) {
     }
 
     if (n == pos) {
-        printw("%*s", COLS - getcurx(stdscr) - 1, "");
+        pad_to_end(' ');
+    } else {
+        printw("\n");
     }
 
-    printw("\n");
     attroff(COLOR_PAIR(color_pos));
     attroff(color_pos_a);
 }
@@ -445,8 +446,6 @@ void draw_title_bar(void) {
     printw("-> %d%% ", percent_done);
 
     pad_to_end(' ');
-
-    printw("\n");
     
     attroff(COLOR_PAIR(color_title));
     attroff(color_title_a);
@@ -455,7 +454,7 @@ void draw_title_bar(void) {
 void pad_to_end(char ch) {
     char buf[1024];
     int i = 0;
-    for (i = 0; i < COLS - getcurx(stdscr) - 1; ++i)
+    for (i = 0; i < COLS - getcurx(stdscr); ++i)
         buf[i] = ch;
     buf[i] = '\0';
     printw("%s", buf);
