@@ -461,7 +461,7 @@ void draw_title_bar(void) {
     printw("%s ", list_name);
     if (new) printw("(new)");
 
-    printw("-- %d tasks ", list.len);
+    printw("-- %d tasks ", num_total);
 
     printw("%d/%d ", num_done, num_total);
 
