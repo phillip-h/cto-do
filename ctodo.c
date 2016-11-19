@@ -454,7 +454,7 @@ void draw_title_bar(void) {
 
     printw("-- %d tasks ", list.len);
 
-    printw("%d/%d ", num_done, list.len);
+    printw("%d/%d ", num_done, num_total);
 
     printw("-> %d%% ", percent_done);
 
