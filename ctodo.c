@@ -31,6 +31,7 @@ void free_list(void);
 
 unsigned num_tasks(void);
 unsigned num_tasks_done(void);
+int adjust_pos(size_t pos);
 
 void start_nc(void);
 void end_nc(void);
@@ -330,7 +331,7 @@ unsigned num_tasks(void) {
     unsigned count = 0;
     for (size_t i = 0; i < list.len; ++i)
         if (list.tasks[i][0] != div_magic_char)
-            count += 1;
+            ++count;
     return count;
 }
 
@@ -338,6 +339,14 @@ unsigned num_tasks_done(void) {
     unsigned count = 0;
     for (size_t i = 0; i < list.len; ++i)
         if (list.done[i] && list.tasks[i][0] != div_magic_char)
+            ++count;
+    return count;
+}
+
+int adjust_pos(size_t pos) {
+    int count = 0;
+    for (size_t i = 0; i < pos; ++i)
+        if (list.tasks[i][0] != div_magic_char)
             ++count;
     return count;
 }
@@ -392,7 +401,7 @@ void draw_task(size_t n, char *task) {
         draw_div(task);
     } else {
         printw("%s", left_pad);
-        draw_number(n);
+        draw_number(adjust_pos(n));
 
         if (n == pos) {
             attron(COLOR_PAIR(color_pos));
