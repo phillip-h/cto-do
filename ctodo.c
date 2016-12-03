@@ -453,7 +453,7 @@ void draw_mark(int n) {
 void draw_title_bar(void) {
     int num_total = num_tasks();
     int num_done = num_tasks_done();
-    int percent_done = num_total ? 100 * num_done / list.len : 0;
+    int percent_done = num_total ? 100 * num_done / num_total : 0;
 
     attron(COLOR_PAIR(color_title));
     attron(color_title_a);
