@@ -527,8 +527,10 @@ void new_task(void) {
 
     if (strlen(task) != 0) {
         add_task(task, false, list.len ? pos + 1 : pos);
-        if (list.len != 0) {
+        if (list.len != 1) {
             pos += 1;
+        } else {
+            pos = 0;
         }
     } else {
         free(task);
