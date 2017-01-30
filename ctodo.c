@@ -54,7 +54,7 @@ int input(void);
 /* configuration options */
 
 const char *vn = "0.1";
-const char *list_dir = ".local/share/cto-do";
+const char *list_dir = ".cto-do";
 
 const bool autosave = true;
 const size_t task_buf_len = 2048 * sizeof(char);
@@ -163,7 +163,7 @@ char* get_path(void) {
 void check_dir(void) {
     char *home = getenv("HOME");
     char *path = get_dir();
-    struct stat st = {0};
+    struct stat st;
 
     strcpy(path, home);
     strcat(path, "/");
